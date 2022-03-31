@@ -23,12 +23,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+
 public class Load extends WindowUploadQuestionnaire {
-    public static final Logger LOGGER = LoggerFactory.getLogger(Load.class);
+    Logger log = LoggerFactory.getLogger(Load.class);
     public void ButtonLoad(){
         WindowUploadQuestionnaire.load.addActionListener(e -> {
             FileInputStream file = null;
@@ -37,10 +37,10 @@ public class Load extends WindowUploadQuestionnaire {
                 HSSFWorkbook WB = new HSSFWorkbook(file);
                 String motor = WB.getSheetAt(0).getRow(1).getCell(0).getStringCellValue();////читаем номер двигателя из файла
                 System.out.println(motor);
-                LOGGER.info("Test log record!!!");
+                log.info("Test log record!!!");
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
-                LOGGER.error("В программе возникла ошибка!");
+                log.error("В программе возникла ошибка!");
             }
 
         });
