@@ -1,4 +1,4 @@
-package Application.Commands;
+package Application.Commands.Authentication;
 
 import Application.Windows.WindowAuthentication;
 

@@ -18,8 +18,8 @@
  */
 package Application.Windows;
 
-import Application.Commands.Cancel;
-import Application.Commands.Ok;
+import Application.Commands.Authentication.Cancel;
+import Application.Commands.Authentication.Ok;
 
 import javax.swing.*;
 

@@ -18,9 +18,7 @@
  */
 package Application.Windows;
 
-import Application.Commands.Ok;
-import Application.Commands.UploadQuestionnaire;
-
+import Application.Commands.Menu.LoadQuestionnaire.UploadQuestionnaire;
 import javax.swing.*;
 
 public class WindowMenu extends JFrame {
