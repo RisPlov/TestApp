@@ -23,8 +23,8 @@ import Application.Commands.Menu.LoadQuestionnaire.Load;
 import javax.swing.*;
 
 public class WindowUploadQuestionnaire extends JFrame {
-    static JLabel aq = new JLabel("Введите адрес анкеты: ");/// указание ввода  адреса файла
-    static final JTextField aft = new JTextField(120);/// текстовое поле адреса файла
+    static JLabel EnterAddressQuestionnaire = new JLabel("Введите адрес анкеты: ");/// указание ввода  адреса файла
+    public static final JTextField AddressText = new JTextField();/// текстовое поле адреса файла
     public static JButton load = new JButton("Загрузить ");///  кнопка "загрузить"
     static JButton exz = new JButton("Назад ");/// кнопка "назад"
 
@@ -32,17 +32,17 @@ public class WindowUploadQuestionnaire extends JFrame {
         super("Загрузка данных"); //Заголовок окна
         setBounds(600, 400, 600, 400);//размер и положение
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
-        aq.setSize(200, 30);
-        aq.setLocation(200, 150);
-        aft.setSize(200, 30);
-        aft.setLocation(200, 200);
+        EnterAddressQuestionnaire.setSize(200, 30);
+        EnterAddressQuestionnaire.setLocation(200, 150);
+        AddressText.setSize(400, 30);
+        AddressText.setLocation(100, 200);
         load.setSize(200, 30);
         load.setLocation(200, 250);
         exz.setSize(200, 30);
         exz.setLocation(200, 300);
         JPanel contents = new JPanel(null);
-        contents.add(aq);
-        contents.add(aft);
+        contents.add(EnterAddressQuestionnaire);
+        contents.add(AddressText);
         contents.add(load);
         contents.add(exz);
         setContentPane(contents);

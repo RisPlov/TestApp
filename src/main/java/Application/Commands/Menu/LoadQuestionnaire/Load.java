@@ -22,27 +22,45 @@ import Application.Windows.WindowUploadQuestionnaire;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
-public class Load extends WindowUploadQuestionnaire {
-    Logger log = LoggerFactory.getLogger(Load.class);
+public class Load  extends WindowUploadQuestionnaire{
+    private final Logger logs = LoggerFactory.getLogger(Load.class);
     public void ButtonLoad(){
         WindowUploadQuestionnaire.load.addActionListener(e -> {
-            FileInputStream file = null;
+            FileInputStream file;
             try {
-                file = new FileInputStream("C:\\Users\\Admin\\IdeaProjects\\ApplicationEmployeeAccounting\\src\\main\\resources\\Анкета.xls");
+                String Address = WindowUploadQuestionnaire.AddressText.getText();
+                file = new FileInputStream(Address);
+                //"C:\\Users\\Admin\\IdeaProjects\\ApplicationEmployeeAccounting\\src\\main\\resources\\Анкета.xls"
                 HSSFWorkbook WB = new HSSFWorkbook(file);
-                String motor = WB.getSheetAt(0).getRow(1).getCell(0).getStringCellValue();////читаем номер двигателя из файла
-                System.out.println(motor);
-                log.info("Test log record!!!");
+
+                Date DataHired = WB.getSheetAt(0).getRow(6).getCell(1).getDateCellValue();////читаем дату из файла
+                SimpleDateFormat YearMonthDay = new SimpleDateFormat("yyyy-MM-dd");
+                String dataHired = YearMonthDay.format(DataHired);
+
+
+
+
+                /*String p1 =  "`test_schema`.`staff`";
+                String sql = ("INSERT INTO" +p1+ "(`surname`, `name`, `age`, `post`, `salary`, `premium`, `hired`) VALUES (?,?,?,?,?,?,?)");
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setString(1, motor);
+                preparedStatement.setString(2, data);
+                preparedStatement.setString(3, formatForDateNow.format(tame));
+                preparedStatement.setString(4, String.valueOf(value));
+                preparedStatement.executeUpdate();*/
+
+                System.out.println(dataHired);
+                logs.info("Test log record!!!");
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
-                log.error("В программе возникла ошибка!");
+                logs.error("Неверно указан адрес файла или файл имеет не верный формат!");
             }
-
         });
     }
 

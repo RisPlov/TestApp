@@ -18,8 +18,28 @@
  */
 package Application;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class DatabaseСlient {
     public static final String USER_NAME = "root";
     public static final String PASSWORD = "root";
     public static final String URL = "jdbc:mysql://localhost:3306/test_schema";
+    public static Connection Conn = null;
+
+    public static Connection StartConnection(){
+
+        try {
+            Connection conn = DriverManager.getConnection(
+                    URL,
+                    USER_NAME,
+                    PASSWORD);
+            Conn = conn;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Conn;
+    }
 }

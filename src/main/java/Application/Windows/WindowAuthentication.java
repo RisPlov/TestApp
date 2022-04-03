@@ -31,7 +31,7 @@ public class WindowAuthentication extends JFrame {
     public static final JPasswordField password = new JPasswordField(12);///текстовое поле пароля
     public static JButton ok = new JButton("OK ");/// кнопка ок
     public static JButton cancel = new JButton("Cancel ");/// конпка отмена
-    public static final JTextField mistake = new JTextField(" ");/// текстовое поле сообщающее об ошибке
+    public static final JLabel mistake = new JLabel(" ");/// текстовое поле сообщающее об ошибке
 
 
     public WindowAuthentication() {
