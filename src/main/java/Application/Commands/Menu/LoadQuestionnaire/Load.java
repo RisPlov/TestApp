@@ -18,12 +18,14 @@
  */
 package Application.Commands.Menu.LoadQuestionnaire;
 
+import Application.DatabaseСlient;
 import Application.Windows.WindowUploadQuestionnaire;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,27 +40,26 @@ public class Load  extends WindowUploadQuestionnaire{
                 file = new FileInputStream(Address);
                 //"C:\\Users\\Admin\\IdeaProjects\\ApplicationEmployeeAccounting\\src\\main\\resources\\Анкета.xls"
                 HSSFWorkbook WB = new HSSFWorkbook(file);
-
                 Date DataHired = WB.getSheetAt(0).getRow(6).getCell(1).getDateCellValue();////читаем дату из файла
                 SimpleDateFormat YearMonthDay = new SimpleDateFormat("yyyy-MM-dd");
                 String dataHired = YearMonthDay.format(DataHired);
-
-
-
-
-                /*String p1 =  "`test_schema`.`staff`";
+                Connection Coon = DatabaseСlient.StartConnection();
+                String p1 =  "`test_schema`.`staff`";
                 String sql = ("INSERT INTO" +p1+ "(`surname`, `name`, `age`, `post`, `salary`, `premium`, `hired`) VALUES (?,?,?,?,?,?,?)");
-                PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, motor);
-                preparedStatement.setString(2, data);
-                preparedStatement.setString(3, formatForDateNow.format(tame));
-                preparedStatement.setString(4, String.valueOf(value));
-                preparedStatement.executeUpdate();*/
-
-                System.out.println(dataHired);
-                logs.info("Test log record!!!");
-            } catch (IOException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
+                PreparedStatement preparedStatement = Coon.prepareStatement(sql);
+                preparedStatement.setString(1, WB.getSheetAt(0).getRow(0).getCell(1).getStringCellValue());
+                preparedStatement.setString(2, WB.getSheetAt(0).getRow(1).getCell(1).getStringCellValue());
+                preparedStatement.setDouble(3, WB.getSheetAt(0).getRow(2).getCell(1).getNumericCellValue());
+                preparedStatement.setString(4, WB.getSheetAt(0).getRow(3).getCell(1).getStringCellValue());
+                preparedStatement.setDouble(5, WB.getSheetAt(0).getRow(4).getCell(1).getNumericCellValue());
+                preparedStatement.setDouble(6, WB.getSheetAt(0).getRow(5).getCell(1).getNumericCellValue());
+                preparedStatement.setString(7, dataHired);
+                preparedStatement.executeUpdate();
+                logs.info("Анкета загружена!");
+                EnterAddressQuestionnaire.setText("Анкета загружена! Введите новый адрес!");
+                AddressText.setText("");
+            } catch (Exception ex) {
+                EnterAddressQuestionnaire.setText("Неверно указан адрес файла или файл имеет не верный формат!");
                 logs.error("Неверно указан адрес файла или файл имеет не верный формат!");
             }
         });

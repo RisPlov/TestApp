@@ -19,12 +19,12 @@
 package Application.Commands.Authentication;
 
 import Application.DatabaseСlient;
+
 import Application.EmployeeAccounting;
 import Application.Windows.WindowAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -53,13 +53,13 @@ public class Ok extends WindowAuthentication {
                         logs.info("Приложение запущено! Пользователь: "+Login);
                         break;
                     }else if (!Login.equals(login) | (pas != password)) {
-                        WindowAuthentication.mistake.setText("Данные введены не верно, попробуйте еще раз!");
+                        mistake.setText("Данные введены не верно, попробуйте еще раз!");
                         logs.info("Данные введены не верно, попробуйте еще раз! Пароль: "+pas+" Логин: "+Login);
                         Coon.close();
                     }
                 }
             } catch (Exception ex) {
-                WindowAuthentication.mistake.setText("Данные введены не верно, попробуйте еще раз!");
+                mistake.setText("Данные введены не верно, попробуйте еще раз!");
                 logs.info("Данные введены не верно, попробуйте еще раз!");
             }
         });

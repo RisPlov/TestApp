@@ -16,30 +16,16 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application;
+package Application.Commands.Menu.LoadQuestionnaire;
 
-import Application.Windows.WindowAuthentication;
-import Application.Windows.WindowMenu;
+import Application.EmployeeAccounting;
 import Application.Windows.WindowUploadQuestionnaire;
 
-
-public class EmployeeAccounting {
-    public static WindowAuthentication app1 = new WindowAuthentication();
-    public static WindowMenu app2 = new WindowMenu();
-    public static WindowUploadQuestionnaire app3 = new WindowUploadQuestionnaire();
-
-    public static void main(String[] ars){
-        app1.setVisible(true);
-        WindowAuthentication.OK.ButtonOK();
-        WindowAuthentication.CANCEL.ButtonCANCEL();
-        WindowMenu.UQ.ButtonUploadQuestionnaire();
-        WindowUploadQuestionnaire.LOAD.ButtonLoad();
-        WindowUploadQuestionnaire.BACK.ButtonBack();
-
-
-
-
-
-
+public class Back extends WindowUploadQuestionnaire {
+    public void ButtonBack() {
+        WindowUploadQuestionnaire.back.addActionListener(e -> {
+            EmployeeAccounting.app2.setVisible(true);
+            EmployeeAccounting.app3.setVisible(false);
+        });
     }
 }
