@@ -16,7 +16,7 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Commands.Menu.LoadQuestionnaire;
+package Application.Commands.Menu.UploadQuestionnaire;
 
 import Application.EmployeeAccounting;
 import Application.Windows.WindowMenu;

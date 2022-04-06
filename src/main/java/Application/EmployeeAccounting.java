@@ -20,6 +20,7 @@ package Application;
 
 import Application.Windows.WindowAuthentication;
 import Application.Windows.WindowMenu;
+import Application.Windows.WindowReportGeneration;
 import Application.Windows.WindowUploadQuestionnaire;
 
 
@@ -27,6 +28,7 @@ public class EmployeeAccounting {
     public static WindowAuthentication app1 = new WindowAuthentication();
     public static WindowMenu app2 = new WindowMenu();
     public static WindowUploadQuestionnaire app3 = new WindowUploadQuestionnaire();
+    public static WindowReportGeneration app4 = new WindowReportGeneration();
 
     public static void main(String[] ars){
         app1.setVisible(true);
@@ -35,7 +37,7 @@ public class EmployeeAccounting {
         WindowMenu.UQ.ButtonUploadQuestionnaire();
         WindowUploadQuestionnaire.LOAD.ButtonLoad();
         WindowUploadQuestionnaire.BACK.ButtonBack();
-
+        WindowMenu.RG.ButtonWindowReportGeneration();
 
 
 

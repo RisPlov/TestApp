@@ -18,9 +18,8 @@
  */
 package Application.Windows;
 
-import Application.Commands.Menu.LoadQuestionnaire.Back;
-import Application.Commands.Menu.LoadQuestionnaire.Load;
-
+import Application.Commands.Menu.UploadQuestionnaire.Back;
+import Application.Commands.Menu.UploadQuestionnaire.Load;
 import javax.swing.*;
 
 public class WindowUploadQuestionnaire extends JFrame {
@@ -49,5 +48,5 @@ public class WindowUploadQuestionnaire extends JFrame {
         setContentPane(contents);
     }
     public static Load LOAD = new Load();
-    public static Back BACK = new Back();
+    public static Back BACK = new Back() {};
 }
