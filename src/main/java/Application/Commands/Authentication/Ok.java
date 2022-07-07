@@ -18,8 +18,7 @@
  */
 package Application.Commands.Authentication;
 
-import Application.DatabaseСlient;
-
+import Application.DatabaseClient;
 import Application.EmployeeAccounting;
 import Application.Windows.WindowAuthentication;
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ import java.sql.Statement;
 
 public class Ok extends WindowAuthentication {
     public final Logger logs = LoggerFactory.getLogger(Ok.class);
-    public void ButtonOK() {//конструктор кнопки OK
+    public void ButtonOK() {//метод кнопки OK
         WindowAuthentication.ok.addActionListener(e -> {
             try {
                 String Login = WindowAuthentication.login.getText();
@@ -38,12 +37,12 @@ public class Ok extends WindowAuthentication {
                 String pa = String.valueOf(p);
                 int pas = Integer.parseInt(pa);
 
-                Connection Coon = DatabaseСlient.StartConnection();
+                Connection Coon = DatabaseClient.StartConnection();
                 Statement statement = Coon.createStatement();
 
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
-                String login = null;
-                int password = 0;
+                String login;
+                int password;
                 while (resultSet.next()) {
                     login = resultSet.getString(2);
                     password = resultSet.getInt(3);

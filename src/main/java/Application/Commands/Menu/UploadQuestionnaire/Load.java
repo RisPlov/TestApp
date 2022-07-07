@@ -18,7 +18,7 @@
  */
 package Application.Commands.Menu.UploadQuestionnaire;
 
-import Application.DatabaseСlient;
+import Application.DatabaseClient;
 import Application.Windows.WindowUploadQuestionnaire;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
@@ -29,7 +29,6 @@ import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Load  extends WindowUploadQuestionnaire{
     private final Logger logs = LoggerFactory.getLogger(Load.class);
     public void ButtonLoad(){
@@ -38,14 +37,14 @@ public class Load  extends WindowUploadQuestionnaire{
             try {
                 String Address = WindowUploadQuestionnaire.AddressText.getText();
                 file = new FileInputStream(Address);
-                //"C:\\Users\\Admin\\IdeaProjects\\ApplicationEmployeeAccounting\\src\\main\\resources\\Анкета.xls"
+                //C:\Users\Admin\IdeaProjects\ApplicationEmployeeAccounting\src\main\resources\Анкета.xls
                 HSSFWorkbook WB = new HSSFWorkbook(file);
                 Date DataHired = WB.getSheetAt(0).getRow(6).getCell(1).getDateCellValue();////читаем дату из файла
                 SimpleDateFormat YearMonthDay = new SimpleDateFormat("yyyy-MM-dd");
                 String dataHired = YearMonthDay.format(DataHired);
-                Connection Coon = DatabaseСlient.StartConnection();
+                Connection Coon = DatabaseClient.StartConnection();
                 String p1 =  "`test_schema`.`staff`";
-                String sql = ("INSERT INTO" +p1+ "(`surname`, `name`, `age`, `post`, `salary`, `premium`, `hired`) VALUES (?,?,?,?,?,?,?)");
+                String sql = ("INSERT INTO" +p1+ "(`surname`, `name`, `age`, `post`, `salary`, `premium`, `hired`, `dismissed`) VALUES (?,?,?,?,?,?,?,?)");
                 PreparedStatement preparedStatement = Coon.prepareStatement(sql);
                 preparedStatement.setString(1, WB.getSheetAt(0).getRow(0).getCell(1).getStringCellValue());
                 preparedStatement.setString(2, WB.getSheetAt(0).getRow(1).getCell(1).getStringCellValue());
@@ -54,13 +53,14 @@ public class Load  extends WindowUploadQuestionnaire{
                 preparedStatement.setDouble(5, WB.getSheetAt(0).getRow(4).getCell(1).getNumericCellValue());
                 preparedStatement.setDouble(6, WB.getSheetAt(0).getRow(5).getCell(1).getNumericCellValue());
                 preparedStatement.setString(7, dataHired);
+                preparedStatement.setBoolean(8,true);
                 preparedStatement.executeUpdate();
                 logs.info("Анкета загружена!");
                 EnterAddressQuestionnaire.setText("Анкета загружена! Введите новый адрес!");
                 AddressText.setText("");
             } catch (Exception ex) {
                 EnterAddressQuestionnaire.setText("Неверно указан адрес файла или файл имеет не верный формат!");
-                logs.error("Неверно указан адрес файла или файл имеет не верный формат!");
+                logs.error("", ex);
             }
         });
     }

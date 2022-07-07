@@ -16,37 +16,35 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Windows;
+package Application.Windows.WindowsCgengingData;
 
-import Application.Commands.Menu.UploadQuestionnaire.BackUQ;
-import Application.Commands.Menu.UploadQuestionnaire.Load;
+import Application.Commands.Menu.ChangingData.CreateEmployee.BackCE;
 import javax.swing.*;
 
-public class WindowUploadQuestionnaire extends JFrame {
-    public static final JLabel EnterAddressQuestionnaire = new JLabel("Введите адрес анкеты: ");/// указание ввода  адреса файла
-    public static final JTextField AddressText = new JTextField();/// текстовое поле адреса файла
-    public static JButton load = new JButton("Загрузить ");///  кнопка "загрузить"
-    public static JButton back = new JButton("Назад ");/// кнопка "назад"
+public class WindowCreateEmployee extends JFrame {
+    public static JLabel text = new JLabel("Введите фамилию сотрудника");
+    public static final JTextField TextPlace = new JTextField(12);
+    public static JButton create = new JButton("Создать ");
+    public static JButton back = new JButton("Назад ");
 
-    public WindowUploadQuestionnaire(){
-        super("Загрузка данных"); //Заголовок окна
+    public WindowCreateEmployee(){
+        super("Добавить данные о новом сотруднике"); //Заголовок окна
         setBounds(600, 400, 600, 400);//размер и положение
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
-        EnterAddressQuestionnaire.setSize(400, 30);
-        EnterAddressQuestionnaire.setLocation(100, 150);
-        AddressText.setSize(400, 30);
-        AddressText.setLocation(100, 200);
-        load.setSize(200, 30);
-        load.setLocation(200, 250);
+        text.setSize(200, 30);
+        text.setLocation(200, 50);
+        TextPlace.setSize(200, 30);
+        TextPlace.setLocation(200, 100);
+        create.setSize(200, 30);
+        create.setLocation(200, 150);
         back.setSize(200, 30);
         back.setLocation(200, 300);
         JPanel contents = new JPanel(null);
-        contents.add(EnterAddressQuestionnaire);
-        contents.add(AddressText);
-        contents.add(load);
+        contents.add(text);
+        contents.add(TextPlace);
+        contents.add(create);
         contents.add(back);
         setContentPane(contents);
     }
-    public static Load LOAD = new Load();
-    public static BackUQ BACKUQWindowUploadQuestionnaire = new BackUQ();
+    public static BackCE BACKWindowCreateEmployee = new BackCE();
 }

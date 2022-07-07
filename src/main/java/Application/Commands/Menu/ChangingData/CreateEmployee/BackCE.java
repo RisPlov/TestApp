@@ -16,39 +16,17 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application;
+package Application.Commands.Menu.ChangingData.CreateEmployee;
 
-import Application.Windows.*;
-import Application.Windows.WindowsCgengingData.WindowChangingData;
+import Application.EmployeeAccounting;
 import Application.Windows.WindowsCgengingData.WindowCreateEmployee;
 
+public class BackCE extends WindowCreateEmployee {
 
-public class EmployeeAccounting {
-    public static WindowAuthentication app1 = new WindowAuthentication();
-    public static WindowMenu app2 = new WindowMenu();
-    public static WindowUploadQuestionnaire app3 = new WindowUploadQuestionnaire();
-    public static WindowReportGeneration app4 = new WindowReportGeneration();
-    public static WindowChangingData app5 = new WindowChangingData();
-    public static WindowCreateEmployee app6 = new WindowCreateEmployee();
-
-    public static void main(String[] ars){
-        app1.setVisible(true);
-        WindowAuthentication.OK.ButtonOK();
-        WindowAuthentication.CANCEL.ButtonCANCEL();
-        WindowMenu.UQ.ButtonUploadQuestionnaire();
-        WindowUploadQuestionnaire.LOAD.ButtonLoad();
-        WindowUploadQuestionnaire.BACKUQWindowUploadQuestionnaire.ButtonBack();
-        WindowMenu.RG.ButtonReportGeneration();
-        WindowReportGeneration.REPORT.ButtonReport();
-        WindowReportGeneration.BACKWindowReportGeneration.ButtonBackRG();
-        WindowMenu.CD.ButtonChangingData();
-        WindowChangingData.BACKWindowChangingData.ButtonBackCD();
-        WindowMenu.EX.ButtonExit();
-        WindowChangingData.CREATE.ButtonCreateEmployee();
-        WindowCreateEmployee.BACKWindowCreateEmployee.ButtonBackCE();
-
-
-
-
+    public void ButtonBackCE(){
+        WindowCreateEmployee.back.addActionListener(e ->{
+            EmployeeAccounting.app5.setVisible(true);
+            EmployeeAccounting.app6.setVisible(false);
+        });
     }
 }

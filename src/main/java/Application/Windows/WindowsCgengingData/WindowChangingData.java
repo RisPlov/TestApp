@@ -16,37 +16,36 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Windows;
-
-import Application.Commands.Menu.ReportGeneration.BackRG;
-import Application.Commands.Menu.ReportGeneration.Report;
+package Application.Windows.WindowsCgengingData;
+import Application.Commands.Menu.ChangingData.BackCD;
+import Application.Commands.Menu.ChangingData.CreateEmployee.CreateEmployee;
 import javax.swing.*;
 
-public class WindowReportGeneration extends JFrame {
-    public static JLabel text = new JLabel("Введите фамилию сотрудника");
-    public static final JTextField TextPlace = new JTextField(12);
-    public static JButton report = new JButton("Сформировать ");
+public class WindowChangingData extends JFrame {
+    public static JButton rg = new JButton("Добавить сотрудника");
+    public static JButton ed = new JButton("Изменить данные сотрудника");
+    public static JButton del = new JButton("Удалить данные о сотруднике");
     public static JButton back = new JButton("Назад ");
 
-    public WindowReportGeneration(){
-        super("Формирование отчета"); //Заголовок окна
-        setBounds(600, 400, 600, 400);//размер и положение
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
-        text.setSize(200, 30);
-        text.setLocation(200, 50);
-        TextPlace.setSize(200, 30);
-        TextPlace.setLocation(200, 100);
-        report.setSize(200, 30);
-        report.setLocation(200, 150);
+    public WindowChangingData(){
+        super("Изменение данных");
+        setBounds(600, 400, 600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        rg.setSize(400, 30);
+        rg.setLocation(100, 50);
+        ed.setSize(400, 30);
+        ed.setLocation(100, 100);
+        del.setSize(400, 30);
+        del.setLocation(100, 150);
         back.setSize(200, 30);
-        back.setLocation(200, 300);
+        back.setLocation(200, 250);
         JPanel contents = new JPanel(null);
-        contents.add(text);
-        contents.add(TextPlace);
-        contents.add(report);
+        contents.add(rg);
+        contents.add(ed);
+        contents.add(del);
         contents.add(back);
         setContentPane(contents);
     }
-    public static BackRG BACKWindowReportGeneration = new BackRG();
-    public static Report REPORT = new Report();
+    public static CreateEmployee CREATE = new CreateEmployee();
+    public static BackCD BACKWindowChangingData = new BackCD();
 }

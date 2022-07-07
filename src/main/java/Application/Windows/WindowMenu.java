@@ -18,6 +18,8 @@
  */
 package Application.Windows;
 
+import Application.Commands.Menu.ChangingData.ChangingData;
+import Application.Commands.Menu.Exit.Exit;
 import Application.Commands.Menu.ReportGeneration.ReportGeneration;
 import Application.Commands.Menu.UploadQuestionnaire.UploadQuestionnaire;
 import javax.swing.*;
@@ -26,9 +28,9 @@ public class WindowMenu extends JFrame {
 
     public static JButton dw = new JButton("Загрузить анкету ");/// кнопка "загрузить данные"
     public static JButton fo = new JButton("Формирование отчета ");/// кнопка "формирование отчета"
-    static JButton rd = new JButton("Изменение данных ");/// кнопка "изменение данных"
-    static JButton pi = new JButton("Просмотр информации ");/// кнопка "просмотр информации"
-    static JButton ex = new JButton("Выход ");/// скнопка "выход"
+    public static JButton rd = new JButton("Изменение данных ");/// кнопка "изменение данных"
+    public static JButton pi = new JButton("Просмотр информации ");/// кнопка "просмотр информации"
+    public static JButton ex = new JButton("Выход ");/// скнопка "выход"
 
         public WindowMenu(){
             super("Меню"); //Заголовок окна
@@ -54,4 +56,6 @@ public class WindowMenu extends JFrame {
         }
     public static UploadQuestionnaire UQ = new UploadQuestionnaire();
     public static ReportGeneration RG = new ReportGeneration();
+    public static ChangingData CD = new ChangingData();
+    public static Exit EX = new Exit();
 }

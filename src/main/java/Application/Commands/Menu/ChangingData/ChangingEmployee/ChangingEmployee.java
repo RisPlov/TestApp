@@ -16,30 +16,16 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application;
+package Application.Commands.Menu.ChangingData.ChangingEmployee;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import Application.EmployeeAccounting;
+import Application.Windows.WindowsCgengingData.WindowChangingData;
 
-public class DatabaseСlient {
-    public static final String USER_NAME = "root";
-    public static final String PASSWORD = "root";
-    public static final String URL = "jdbc:mysql://localhost:3306/test_schema";
-    public static Connection Conn = null;
-
-    public static Connection StartConnection(){
-
-        try {
-            Connection conn = DriverManager.getConnection(
-                    URL,
-                    USER_NAME,
-                    PASSWORD);
-            Conn = conn;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return Conn;
+public class ChangingEmployee extends WindowChangingData {
+    public void ButtonChangingEmployee(){
+        WindowChangingData.ed.addActionListener(e -> {
+            EmployeeAccounting.app6.setVisible(true);
+            EmployeeAccounting.app5.setVisible(false);
+        });
     }
 }

@@ -1,0 +1,625 @@
+package com.jdbc;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Main {
+    static int k1 = 3; static int k2 = 3; static int p1 = 0; static int p2 = 0;///необходимые переменные
+    static JLabel logLabel = new JLabel("Введите логин: ");/// указание ввода  логина
+    static JLabel passLabel = new JLabel("Введите пароль: ");/// указание ввода пароля
+    static final JTextField login = new JTextField(12);///  текстовое поле логина
+    static final JPasswordField password = new JPasswordField(12);///текстовое поле пароля
+    static JButton ok = new JButton("OK ");/// кнопка ок
+    static JButton cancel = new JButton("Cancel ");/// конпка отмена
+    static final JTextField mistake = new JTextField(" ");/// текстовое поле сообщающее об ошибке
+
+    static JButton dw = new JButton("Загрузить данные ");/// кнопка "загрузить данные"
+    static JButton fo = new JButton("Формирование отчета ");/// кнопка "формирование отчета"
+    static JButton rd = new JButton("Изменение данных ");/// кнопка "изменение данных"
+    static JButton pi = new JButton("Просмотр информации ");/// кнопка "просмотр информации"
+    static JButton ex = new JButton("Выход ");/// скнопка "выход"
+
+    static JLabel nd = new JLabel("Введите номер двигателя: ");/// указание ввода  номера двигателя
+    static final JTextField ndt = new JTextField(12);/// текстовое поле номера двигателя
+    static JLabel af = new JLabel("Введите адрес файла: ");/// указание ввода  адреса файла
+    static final JTextField aft = new JTextField(120);/// текстовое поле адреса файла
+    static JButton load = new JButton("Загрузить ");///  кнопка "загрузить"
+    static JButton exz = new JButton("Назад ");/// кнопка "назад"
+
+    static JLabel nd1 = new JLabel("Введите номер двигателя");/// указание ввода  номера двигателя
+    static final JTextField motonom = new JTextField(12);/// текстовое поле номера двигателя
+    static JButton form = new JButton("Сформировать ");/// кнопка "сформировать"
+    static JButton exz1 = new JButton("Назад ");/// кнопка "назад"
+
+    static JLabel eror = new JLabel("Недостотачно прав доступа!");/// сообщение об отсутствии прав доступа
+    static JButton exz2 = new JButton("Назад ");/// кнопка "назад"
+
+    static JButton rg = new JButton("Зарегистрировать новый двигатель или параметр");/// кнопка "Зарегистрировать новый двигатель или параметр"
+    static JButton ed = new JButton("Редактировать двигатель или параметр");/// кнопка "Редактировать двигатель или параметр"
+    static JButton del = new JButton("Удалить двигатель или параметр");/// кнопка "Удалить двигатель или параметр"
+    static JButton exz3 = new JButton("Назад ");/// кнопка "назад"
+
+    static JButton sd = new JButton("Двигатели");/// кнопка "двигатели"
+    static JButton sp = new JButton("Параметры");/// кнопка "параметры"
+    static JButton dan = new JButton("Данные");/// кнопка "данные"
+    static JButton exz4 = new JButton("Назад ");/// кнопка "назад"
+
+    static final JTextArea  motors = new JTextArea(" ");/// текстовое поле для списка двигателей
+    static JButton exz5 = new JButton("Назад ");/// кнопка "назад"
+
+    static JLabel nd2 = new JLabel("Введите номер нового двигателя");/// кнопка "Введите номер нового двигателя"
+    static final JTextField ndt1 = new JTextField(12);/// текстовое поле для нового двигателя
+    static JLabel np = new JLabel("Введите название нового параметра");/// кнопка "Введите номер нового параметра"
+    static final JTextField npt = new JTextField(120);/// текстовое поле для нового параметра
+    static JButton reg = new JButton("Зарегистрировать");/// кнопка "зарегестрировать"
+    static JButton exz6 = new JButton("Назад ");/// кнопка "назад"
+
+    static JLabel eror2 = new JLabel("Данные указаны не верно!");/// сообщение об шибке ввода данных
+    static JButton exz7 = new JButton("Назад ");/// кнопка "назад"
+
+    static class window1 extends JFrame {
+        window1() {
+            super("Система анализа"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            logLabel.setSize(150, 100);
+            logLabel.setLocation(20, 40);
+            passLabel.setSize(150, 100);
+            passLabel.setLocation(20, 100);
+            login.setSize(150, 25);
+            login.setLocation(300, 80);
+            password.setEchoChar('*');
+            password.setSize(150, 25);
+            password.setLocation(300, 140);
+            ok.setSize(60, 30);
+            ok.setLocation(300, 200);
+            cancel.setSize(100, 30);
+            cancel.setLocation(400, 200);
+            mistake.setSize(300, 30);
+            mistake.setLocation(200, 250);
+            JPanel contents = new JPanel(null);
+            contents.add(passLabel);
+            contents.add(logLabel);
+            contents.add(password);
+            contents.add(login);
+            contents.add(ok);
+            contents.add(cancel);
+            contents.add(mistake);
+            setContentPane(contents);//// создание окна со всеми элементами
+        }
+    }
+    static class window2 extends JFrame {
+        window2(){
+            super("Меню"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            dw.setSize(200, 30);
+            dw.setLocation(200, 50);
+            fo.setSize(200, 30);
+            fo.setLocation(200, 100);
+            rd.setSize(200, 30);
+            rd.setLocation(200, 150);
+            pi.setSize(200, 30);
+            pi.setLocation(200, 200);
+            ex.setSize(200, 30);
+            ex.setLocation(200, 250);
+            JPanel contents = new JPanel(null);
+            contents.add(dw);
+            contents.add(fo);
+            contents.add(rd);
+            contents.add(pi);
+            contents.add(ex);
+            setContentPane(contents);
+        }
+    }
+    static class window3 extends JFrame {
+        window3(){
+            super("Загрузка данных"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            nd.setSize(200, 30);
+            nd.setLocation(200, 50);
+            ndt.setSize(200, 30);
+            ndt.setLocation(200, 100);
+            af.setSize(200, 30);
+            af.setLocation(200, 150);
+            aft.setSize(200, 30);
+            aft.setLocation(200, 200);
+            load.setSize(200, 30);
+            load.setLocation(200, 250);
+            exz.setSize(200, 30);
+            exz.setLocation(200, 300);
+            JPanel contents = new JPanel(null);
+            contents.add(nd);
+            contents.add(ndt);
+            contents.add(af);
+            contents.add(aft);
+            contents.add(load);
+            contents.add(exz);
+            setContentPane(contents);
+        }
+    }
+    static class window4 extends JFrame {
+        window4(){
+            super("Формирование отчета"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            nd1.setSize(200, 30);
+            nd1.setLocation(200, 50);
+            motonom.setSize(200, 30);
+            motonom.setLocation(200, 100);
+            form.setSize(200, 30);
+            form.setLocation(200, 150);
+            exz1.setSize(200, 30);
+            exz1.setLocation(200, 300);
+            JPanel contents = new JPanel(null);
+            contents.add(nd1);
+            contents.add(motonom);
+            contents.add(form);
+            contents.add(exz1);
+            setContentPane(contents);
+        }
+    }
+    static class window5 extends JFrame {
+        window5(){
+            super("Ошибка!"); //Заголовок окна
+            setBounds(700, 500, 400, 200);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            eror.setSize(200, 30);
+            eror.setLocation(100, 50);
+            exz2.setSize(200, 30);
+            exz2.setLocation(100, 100);
+            JPanel contents = new JPanel(null);
+            contents.add(eror);
+            contents.add(exz2);
+            setContentPane(contents);
+        }
+    }
+    static class window6 extends JFrame {
+        window6(){
+            super("Изменение данных"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            rg.setSize(400, 30);
+            rg.setLocation(100, 50);
+            ed.setSize(400, 30);
+            ed.setLocation(100, 100);
+            del.setSize(400, 30);
+            del.setLocation(100, 150);
+            exz3.setSize(200, 30);
+            exz3.setLocation(200, 250);
+            JPanel contents = new JPanel(null);
+            contents.add(rg);
+            contents.add(ed);
+            contents.add(del);
+            contents.add(exz3);
+            setContentPane(contents);
+        }
+    }
+    static class window7 extends JFrame {
+        window7(){
+            super("Просмотр информации"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            sd.setSize(200, 30);
+            sd.setLocation(200, 50);
+            sp.setSize(200, 30);
+            sp.setLocation(200, 100);
+            dan.setSize(200, 30);
+            dan.setLocation(200, 150);
+            exz4.setSize(200, 30);
+            exz4.setLocation(200, 200);
+            JPanel contents = new JPanel(null);
+            contents.add(sd);
+            contents.add(sp);
+            contents.add(dan);
+            contents.add(exz4);
+            setContentPane(contents);
+        }
+    }
+    static class window8 extends JFrame {
+        window8(){
+            super("Список двигателей"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            motors.setSize(200, 200);
+            motors.setLocation(200, 50);
+            exz5.setSize(200, 30);
+            exz5.setLocation(200, 300);
+            JPanel contents = new JPanel(null);
+            contents.add(motors);
+            contents.add(exz5);
+            setContentPane(contents);
+        }
+    }
+    static class window9 extends JFrame {
+        window9(){
+            super("Зарегистрировать новый двигатель или параметр"); //Заголовок окна
+            setBounds(600, 400, 600, 400);//размер и положение
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+            nd2.setSize(200, 30);
+            nd2.setLocation(200, 50);
+            ndt1.setSize(200, 30);
+            ndt1.setLocation(150, 100);
+            np.setSize(300, 30);
+            np.setLocation(200, 150);
+            npt.setSize(200, 30);
+            npt.setLocation(200, 200);
+            reg.setSize(200, 30);
+            reg.setLocation(200, 250);
+            exz6.setSize(200, 30);
+            exz6.setLocation(200, 300);
+            JPanel contents = new JPanel(null);
+            contents.add(nd2);
+            contents.add(ndt1);
+            contents.add(np);
+            contents.add(npt);
+            contents.add(reg);
+            contents.add(exz6);
+            setContentPane(contents);
+        }}
+        static class window10 extends JFrame {
+            window10(){
+                super("Ошибка!"); //Заголовок окна
+                setBounds(700, 500, 400, 200);//размер и положение
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при закрытии окна закрывалась и программа, иначе она останется висеть в процессах
+                eror2.setSize(200, 30);
+                eror2.setLocation(100, 50);
+                exz7.setSize(200, 30);
+                exz7.setLocation(100, 100);
+                JPanel contents = new JPanel(null);
+                contents.add(eror2);
+                contents.add(exz7);
+                setContentPane(contents);
+            }
+        }
+    public static void main(final String[] args) {
+        final window1 app1 = new window1();
+        final window3 app3 = new window3();
+        final window2 app2 = new window2();
+        final window4 app4 = new window4();
+        final window5 app5 = new window5();
+        final window6 app6 = new window6();
+        final window7 app7 = new window7();
+        final window8 app8 = new window8();
+        final window9 app9 = new window9();
+        final window10 app10 = new window10();
+        app1.setVisible(true); //С этого момента приложение запущено!
+
+        ok.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String log = login.getText();
+                char[] p = password.getPassword();
+                String pas = String.valueOf(p);
+
+                try {
+                    File file = new File("C:\\Users\\Admin\\IdeaProjects\\Sistema analiza\\src\\main\\java\\com\\jdbc\\login.txt");
+                    FileReader fr = new FileReader(file);//создаем объект FileReader для объекта File
+                    BufferedReader reader = new BufferedReader(fr);//создаем BufferedReader с существующего FileReader для построчного считывания
+                    String line = reader.readLine();// считаем сначала первую строку
+                    while (line != null) {
+                        p1 = p1 + 1;
+                        if (log.equals(line)) {
+                            k1 = 0;
+                            break;
+                        } else {
+                            k1 = 1;
+                        }
+                        line = reader.readLine(); // считываем остальные строки в цикле
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+                try {
+                    File file = new File("C:\\Users\\Admin\\IdeaProjects\\Sistema analiza\\src\\main\\java\\com\\jdbc\\passw.txt");
+                    FileReader fr = new FileReader(file);//создаем объект FileReader для объекта File
+                    BufferedReader reader = new BufferedReader(fr);//создаем BufferedReader с существующего FileReader для построчного считывания
+                    String line = reader.readLine();// считаем сначала первую строку
+                    while (line != null) {
+                        p2 = p2 + 1;
+                        if (pas.equals(line)) {
+                            k2 = 0;
+                            break;
+                        } else {
+                            k2 = 1;
+                        }
+                        line = reader.readLine(); // считываем остальные строки в цикле
+                    }
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+                if (k1 == 0 & k2 == 0 & p1 == p2) {mistake.setText("Добро пожаловать!"); app2.setVisible(true);app1.setVisible(false);}
+                else {mistake.setText("Данные введены не верно, попробуйте еще раз.");k1 = 0; k2 = 0;p1 = 0;p2 = 0;}
+            }
+        });
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);////закрытие программы
+            }
+        });
+        dw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app3.setVisible(true);app2.setVisible(false);
+            }
+        });
+        load.addActionListener(new ActionListener() {/////загружаем данные из другого файла
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    String nomermotora = nd.getText();////введенный номер двигателя
+                    String adress = af.getText();////введенный номер двигателя
+                    if (adress.equals(null) || nomermotora.equals(null)) app10.setVisible(true);
+                try (final Connection conn = DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/MySQL?serverTimezone=UTC", "root", "admin")) {
+                        if (conn != null) {
+                            System.out.println("Connected to the database!");
+                        } else {
+                            System.out.println("Failed to make connection!");
+                        }
+                        Statement statement = conn.createStatement();
+                        {
+                            FileInputStream fis = new FileInputStream(new File("C:\\Users\\Admin\\Desktop\\123\\данные.xls"));
+                            HSSFWorkbook wb = new HSSFWorkbook(fis);
+
+                            String motor = wb.getSheetAt(0).getRow(1).getCell(0).getStringCellValue();////читаем номер двигателя из файла
+
+                            Date res = wb.getSheetAt(0).getRow(1).getCell(1).getDateCellValue();////читаем дату из файла
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            String data = sdf.format(res);
+
+
+                            for (int i = 3; i < 5; i++) {
+                                String parametrs = wb.getSheetAt(0).getRow(i).getCell(0).getStringCellValue();////читаем название параметра двигателя из файла
+                                String p1 =  "`struktura`."+"`"+parametrs+"`";
+                                for (int i1 = 1; i1 <25; i1++) {
+                                    Date tame = wb.getSheetAt(0).getRow(2).getCell(i1).getDateCellValue();////читаем время регестрации параметра из файла
+                                    SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
+                                    ///System.out.println(formatForDateNow.format(tame));
+
+                                    double value = wb.getSheetAt(0).getRow(i).getCell(i1).getNumericCellValue();///читаем значение параметра
+                                    String sql = ("INSERT INTO" +p1+ "(`number motors`, `data`, `time`, `value`) VALUES (?,?,?,?)");
+                                    PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                                    preparedStatement.setString(1, motor);
+                                    preparedStatement.setString(2, data);
+                                    preparedStatement.setString(3, formatForDateNow.format(tame));
+                                    preparedStatement.setString(4, String.valueOf(value));
+                                    preparedStatement.executeUpdate();
+                                }
+                            }
+                            fis.close();
+                        }
+                    } catch (SQLException | IOException e3) {
+                        e3.printStackTrace();
+                    }
+                }
+        });
+
+
+        ex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);////закрытие программы
+            }
+        });
+
+        exz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app2.setVisible(true);app3.setVisible(false);
+            }
+        });
+        fo.addActionListener(new ActionListener() {/////формирование отчета
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app4.setVisible(true);app2.setVisible(false);
+            }
+        });
+        exz1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app2.setVisible(true);app4.setVisible(false);
+            }
+        });
+        rd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (p1>1)app5.setVisible(true);
+                else {app6.setVisible(true);app2.setVisible(false);}
+            }
+        });
+        exz3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app2.setVisible(true);app6.setVisible(false);
+            }
+        });
+        exz2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app2.setVisible(true);app5.setVisible(false);
+            }
+        });
+        pi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (p1>1)app5.setVisible(true);
+                else { app7.setVisible(true);app2.setVisible(false);
+            }}
+        });
+        exz4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app2.setVisible(true);app7.setVisible(false);
+            }
+        });
+        sd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app8.setVisible(true);app7.setVisible(false);
+                try (final Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/MySQL?serverTimezone=UTC", "root", "admin")) {
+                    if (conn != null) {
+                        System.out.println("Connected to the database!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                    Statement statement = conn.createStatement();{
+                        ResultSet resultSet = statement.executeQuery("SELECT * FROM struktura.motors");//////вывод таблиц на экран
+                        String a = "";
+                        while(resultSet.next()){
+                            String number = resultSet.getString(2);
+                            a = a + number + "\n";
+                        }
+                        motors.setText(a);
+                    }
+                } catch (SQLException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+        exz5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app7.setVisible(true);app8.setVisible(false);
+            }
+        });
+        rg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app9.setVisible(true);app6.setVisible(false);
+            }
+        });
+        exz6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app6.setVisible(true);app9.setVisible(false);
+            }
+        });
+        reg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try (final Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/MySQL?serverTimezone=UTC", "root", "admin")) {
+                    if (conn != null) {
+                        System.out.println("Connected to the database!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                    Statement statement = conn.createStatement();{
+                        String n = ndt1.getText();
+                        if (n!= null){
+                        String sql ="INSERT INTO `struktura`.`motors` (`motors number`) VALUES (?);";
+                        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                        preparedStatement.setString(1, n);
+                        preparedStatement.executeUpdate();}
+                    }
+                } catch (SQLException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+        form.addActionListener(new ActionListener() {////формируем отчет по двигателям
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomermotora = motonom.getText();////введенный номер двигателя
+                try (final Connection conn = DriverManager.getConnection(////подключаемся к БД
+                        "jdbc:mysql://localhost:3306/MySQL?serverTimezone=UTC", "root", "admin")) {
+                    if (conn != null) {
+                        System.out.println("Connected to the database!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                    Statement statement = conn.createStatement();{
+                        ResultSet resultSet = statement.executeQuery("SELECT * FROM struktura.motors");//////создаем запрос на список двигателей
+                        String a = "";////вспомогательная переменная а
+                        while(resultSet.next()){///записываем список двигателей в переменную а
+                            String number = resultSet.getString(2);
+                            a = a + number + "\n";
+                        }
+                        int index1 = a.indexOf(nomermotora);////проверяем существует ли двигатель в БД
+                            if (index1>-1){///формируем отчет
+                                try {
+                                    String filename = "C:\\Users\\Admin\\Desktop\\123\\отчет.xls" ;
+                                    HSSFWorkbook workbook = new HSSFWorkbook();
+                                    HSSFSheet sheet = workbook.createSheet("FirstSheet");
+
+                                    HSSFRow rowhead = sheet.createRow((short)0);
+                                    rowhead.createCell(0).setCellValue("Номер двигателя");
+                                    rowhead.createCell(1).setCellValue("Дата и время отчета");
+                                    rowhead.createCell(2).setCellValue("Процент отказа");
+                                    rowhead.createCell(3).setCellValue("Рекомендации");
+
+                                    java.util.Date date = new Date();// Инициализация объекта даты и времени формирования отчета
+                                    String d = date.toString();
+                                    HSSFRow row = sheet.createRow((short)1);
+                                    row.createCell(0).setCellValue(nomermotora);
+                                    row.createCell(1).setCellValue(d);
+                                    row.createCell(2).setCellValue("1");
+                                    row.createCell(3).setCellValue("Эксплуатация согласно руководству по эксплуатации");
+
+                                    FileOutputStream fileOut = new FileOutputStream(filename);
+                                    workbook.write(fileOut);
+                                    fileOut.close();
+                                } catch ( Exception ex ) {
+                                }
+                            }
+                            else app10.setVisible(true);
+                    }
+                } catch (SQLException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+        exz7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app10.setVisible(false);
+            }
+        });
+        load.addActionListener(new ActionListener() {/////загружаем параметры в БД
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomermotora = ndt.getText();////введенный номер двигателя
+                String adresfaila = aft.getText();////введенный номер двигателя
+                try (final Connection conn = DriverManager.getConnection(////подключаемся к БД
+                        "jdbc:mysql://localhost:3306/MySQL?serverTimezone=UTC", "root", "admin")) {
+                    if (conn != null) {
+                        System.out.println("Connected to the database!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                    Statement statement = conn.createStatement();{
+                        ResultSet resultSet = statement.executeQuery("SELECT * FROM struktura.motors");//////создаем запрос на список двигателей
+                        String a = "";////вспомогательная переменная а
+                        while(resultSet.next()){///записываем список двигателей в переменную а
+                            String number = resultSet.getString(2);
+                            a = a + number + "\n";
+                        }
+                        int index1 = a.indexOf(nomermotora);////проверяем существует ли двигатель в БД
+                        if (index1>-1 & adresfaila!=null){///записываем данные
+
+                        }
+                        else app10.setVisible(true);///сообщение об ошибке
+                    }
+                } catch (SQLException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+
+    }
+}
+
+
+
+

@@ -16,16 +16,27 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Commands.Menu.UploadQuestionnaire;
+package Application;
 
-import Application.EmployeeAccounting;
-import Application.Windows.WindowUploadQuestionnaire;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class Back extends WindowUploadQuestionnaire {
-    public void ButtonBack() {
-        WindowUploadQuestionnaire.back.addActionListener(e -> {
-            EmployeeAccounting.app2.setVisible(true);
-            EmployeeAccounting.app3.setVisible(false);
-        });
+public class DatabaseClient {
+    public static final String USER_NAME = "root";
+    public static final String PASSWORD = "root";
+    public static final String URL = "jdbc:mysql://localhost:3306/test_schema?serverTimezone=UTC";
+    public static Connection Conn = null;
+
+    public static Connection StartConnection(){
+        try {
+            Conn = DriverManager.getConnection(
+                    URL,
+                    USER_NAME,
+                    PASSWORD);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return Conn;
     }
 }
