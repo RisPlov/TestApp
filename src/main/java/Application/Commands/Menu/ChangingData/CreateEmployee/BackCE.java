@@ -27,6 +27,14 @@ public class BackCE extends WindowCreateEmployee {
         WindowCreateEmployee.back.addActionListener(e ->{
             EmployeeAccounting.app5.setVisible(true);
             EmployeeAccounting.app6.setVisible(false);
+            info.setText("");
+            sureNameText.setText("");
+            nameText.setText("");
+            ageText.setText("");
+            postText.setText("");
+            salaryText.setText("");
+            premiumText.setText("");
+            hiredText.setText("");
         });
     }
 }

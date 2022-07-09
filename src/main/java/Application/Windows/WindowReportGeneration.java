@@ -47,6 +47,6 @@ public class WindowReportGeneration extends JFrame {
         contents.add(back);
         setContentPane(contents);
     }
-    public static BackRG BACKWindowReportGeneration = new BackRG();
+    public static BackRG backWindowReportGeneration = new BackRG();
     public static Report REPORT = new Report();
 }

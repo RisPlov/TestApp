@@ -30,25 +30,21 @@ public class EmployeeAccounting {
     public static WindowReportGeneration app4 = new WindowReportGeneration();
     public static WindowChangingData app5 = new WindowChangingData();
     public static WindowCreateEmployee app6 = new WindowCreateEmployee();
-
     public static void main(String[] ars){
-        app1.setVisible(true);
+        app6.setVisible(true);
         WindowAuthentication.OK.ButtonOK();
         WindowAuthentication.CANCEL.ButtonCANCEL();
         WindowMenu.UQ.ButtonUploadQuestionnaire();
         WindowUploadQuestionnaire.LOAD.ButtonLoad();
-        WindowUploadQuestionnaire.BACKUQWindowUploadQuestionnaire.ButtonBack();
-        WindowMenu.RG.ButtonReportGeneration();
+        WindowUploadQuestionnaire.backWindowUploadQuestionnaire.ButtonBack();
+        WindowMenu.reportGeneration.ButtonReportGeneration();
         WindowReportGeneration.REPORT.ButtonReport();
-        WindowReportGeneration.BACKWindowReportGeneration.ButtonBackRG();
-        WindowMenu.CD.ButtonChangingData();
-        WindowChangingData.BACKWindowChangingData.ButtonBackCD();
-        WindowMenu.EX.ButtonExit();
-        WindowChangingData.CREATE.ButtonCreateEmployee();
-        WindowCreateEmployee.BACKWindowCreateEmployee.ButtonBackCE();
-
-
-
-
+        WindowReportGeneration.backWindowReportGeneration.ButtonBackRG();
+        WindowMenu.changingData.ButtonChangingData();
+        WindowChangingData.backWindowChangingData.ButtonBackCD();
+        WindowMenu.menuExit.ButtonExit();
+        WindowChangingData.createEmployee.ButtonCreateEmployee();
+        WindowCreateEmployee.backWindowCreateEmployee.ButtonBackCE();
+        WindowCreateEmployee.createElement.ButtonCreate();
     }
 }

@@ -46,6 +46,6 @@ public class WindowChangingData extends JFrame {
         contents.add(back);
         setContentPane(contents);
     }
-    public static CreateEmployee CREATE = new CreateEmployee();
-    public static BackCD BACKWindowChangingData = new BackCD();
+    public static CreateEmployee createEmployee = new CreateEmployee();
+    public static BackCD backWindowChangingData = new BackCD();
 }

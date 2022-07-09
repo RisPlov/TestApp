@@ -48,5 +48,5 @@ public class WindowUploadQuestionnaire extends JFrame {
         setContentPane(contents);
     }
     public static Load LOAD = new Load();
-    public static BackUQ BACKUQWindowUploadQuestionnaire = new BackUQ();
+    public static BackUQ backWindowUploadQuestionnaire = new BackUQ();
 }

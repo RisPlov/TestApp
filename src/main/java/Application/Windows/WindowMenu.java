@@ -55,7 +55,7 @@ public class WindowMenu extends JFrame {
             setContentPane(contents);
         }
     public static UploadQuestionnaire UQ = new UploadQuestionnaire();
-    public static ReportGeneration RG = new ReportGeneration();
-    public static ChangingData CD = new ChangingData();
-    public static Exit EX = new Exit();
+    public static ReportGeneration reportGeneration = new ReportGeneration();
+    public static ChangingData changingData = new ChangingData();
+    public static Exit menuExit = new Exit();
 }
