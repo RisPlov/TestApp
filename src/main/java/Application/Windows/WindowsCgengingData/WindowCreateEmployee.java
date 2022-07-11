@@ -18,7 +18,7 @@
  */
 package Application.Windows.WindowsCgengingData;
 
-import Application.Commands.Menu.ChangingData.CreateEmployee.BackCE;
+import Application.Commands.Menu.ChangingData.CreateEmployee.BackCreateEmployee;
 import Application.Commands.Menu.ChangingData.CreateEmployee.Create;
 
 import javax.swing.*;
@@ -103,7 +103,6 @@ public class WindowCreateEmployee extends JFrame {
         contents.add(back);
         setContentPane(contents);
     }
-    public static BackCE backWindowCreateEmployee = new BackCE();
-
+    public static BackCreateEmployee backWindowCreateEmployee = new BackCreateEmployee();
     public static Create createElement = new Create();
 }

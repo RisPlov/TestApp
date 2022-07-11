@@ -20,6 +20,7 @@ package Application;
 
 import Application.Windows.*;
 import Application.Windows.WindowsCgengingData.WindowChangingData;
+import Application.Windows.WindowsCgengingData.WindowChangingEmployee;
 import Application.Windows.WindowsCgengingData.WindowCreateEmployee;
 
 
@@ -30,8 +31,9 @@ public class EmployeeAccounting {
     public static WindowReportGeneration app4 = new WindowReportGeneration();
     public static WindowChangingData app5 = new WindowChangingData();
     public static WindowCreateEmployee app6 = new WindowCreateEmployee();
+    public static WindowChangingEmployee app7 =new WindowChangingEmployee();
     public static void main(String[] ars){
-        app6.setVisible(true);
+        app7.setVisible(true);
         WindowAuthentication.OK.ButtonOK();
         WindowAuthentication.CANCEL.ButtonCANCEL();
         WindowMenu.UQ.ButtonUploadQuestionnaire();
@@ -46,5 +48,8 @@ public class EmployeeAccounting {
         WindowChangingData.createEmployee.ButtonCreateEmployee();
         WindowCreateEmployee.backWindowCreateEmployee.ButtonBackCE();
         WindowCreateEmployee.createElement.ButtonCreate();
+        WindowChangingData.changingEmployee.ButtonChangingEmployee();
+        WindowChangingEmployee.backChangingEmployee.ButtonBackChangingEmployee();
+        WindowChangingEmployee.changeElement.ButtonChange();
     }
 }

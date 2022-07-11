@@ -18,14 +18,32 @@
  */
 package Application.Commands.Menu.ChangingData.ChangingEmployee;
 
-import Application.EmployeeAccounting;
-import Application.Windows.WindowsCgengingData.WindowChangingData;
+import Application.Windows.WindowsCgengingData.WindowChangingEmployee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class ChangingEmployee extends WindowChangingData {
-    public void ButtonChangingEmployee(){
-        WindowChangingData.ed.addActionListener(e -> {
-            EmployeeAccounting.app7.setVisible(true);
-            EmployeeAccounting.app5.setVisible(false);
+public class Change extends WindowChangingEmployee {
+    private final Logger logs = LoggerFactory.getLogger(Change.class);
+    public void ButtonChange(){
+        WindowChangingEmployee.change.addActionListener(e -> {
+            try {
+                if (sureNameText.getText().equals("")){
+                    info.setText("Для загрузки анкеты введите фимилию!");
+                    logs.error("Для загрузки анкеты введите фимилию!");
+                }
+                else {
+                    String sureName = sureNameText.getText();
+                    String name = nameText.getText();
+                    Double age = Double.parseDouble(ageText.getText().trim());
+                    String post = postText.getText();
+                    Double salary = Double.parseDouble(salaryText.getText().trim());
+                    Double premium = Double.parseDouble(premiumText.getText().trim());
+                    String dataHired = hiredText.getText();
+                    String dataDismissal = dismissalText.getText();
+                }
+            } catch (Exception ex) {
+                logs.error("", ex);
+            }
         });
     }
 }

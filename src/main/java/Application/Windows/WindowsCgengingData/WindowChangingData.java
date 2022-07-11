@@ -18,6 +18,7 @@
  */
 package Application.Windows.WindowsCgengingData;
 import Application.Commands.Menu.ChangingData.BackCD;
+import Application.Commands.Menu.ChangingData.ChangingEmployee.ChangingEmployee;
 import Application.Commands.Menu.ChangingData.CreateEmployee.CreateEmployee;
 import javax.swing.*;
 
@@ -47,5 +48,8 @@ public class WindowChangingData extends JFrame {
         setContentPane(contents);
     }
     public static CreateEmployee createEmployee = new CreateEmployee();
+    public static ChangingEmployee changingEmployee = new ChangingEmployee();
     public static BackCD backWindowChangingData = new BackCD();
+
+
 }

@@ -16,18 +16,18 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Commands.Menu.ChangingData.CreateEmployee;
+package Application.Commands.Menu.ChangingData.ChangingEmployee;
 
 import Application.EmployeeAccounting;
-import Application.Windows.WindowsCgengingData.WindowCreateEmployee;
+import Application.Windows.WindowsCgengingData.WindowChangingEmployee;
 
-public class BackCE extends WindowCreateEmployee {
 
-    public void ButtonBackCE(){
-        WindowCreateEmployee.back.addActionListener(e ->{
+public class BackChangingEmployee extends WindowChangingEmployee {
+    public void ButtonBackChangingEmployee(){
+        BackChangingEmployee.back.addActionListener(e ->{
             EmployeeAccounting.app5.setVisible(true);
-            EmployeeAccounting.app6.setVisible(false);
-            info.setText("");
+            EmployeeAccounting.app7.setVisible(false);
+            info.setText("Введите фамилию сотрудника и данные для изменения");
             sureNameText.setText("");
             nameText.setText("");
             ageText.setText("");

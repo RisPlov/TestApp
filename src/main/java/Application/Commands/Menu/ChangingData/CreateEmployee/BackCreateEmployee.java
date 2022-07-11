@@ -16,16 +16,25 @@
  * ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ,
  * АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package Application.Commands.Menu.ChangingData.ChangingEmployee;
+package Application.Commands.Menu.ChangingData.CreateEmployee;
 
 import Application.EmployeeAccounting;
-import Application.Windows.WindowsCgengingData.WindowChangingData;
+import Application.Windows.WindowsCgengingData.WindowCreateEmployee;
 
-public class ChangingEmployee extends WindowChangingData {
-    public void ButtonChangingEmployee(){
-        WindowChangingData.ed.addActionListener(e -> {
-            EmployeeAccounting.app7.setVisible(true);
-            EmployeeAccounting.app5.setVisible(false);
+public class BackCreateEmployee extends WindowCreateEmployee {
+
+    public void ButtonBackCE(){
+        WindowCreateEmployee.back.addActionListener(e ->{
+            EmployeeAccounting.app5.setVisible(true);
+            EmployeeAccounting.app6.setVisible(false);
+            info.setText("");
+            sureNameText.setText("");
+            nameText.setText("");
+            ageText.setText("");
+            postText.setText("");
+            salaryText.setText("");
+            premiumText.setText("");
+            hiredText.setText("");
         });
     }
 }
