@@ -33,7 +33,7 @@ public class EmployeeAccounting {
     public static WindowCreateEmployee app6 = new WindowCreateEmployee();
     public static WindowChangingEmployee app7 =new WindowChangingEmployee();
     public static void main(String[] ars){
-        app7.setVisible(true);
+        app1.setVisible(true);
         WindowAuthentication.OK.ButtonOK();
         WindowAuthentication.CANCEL.ButtonCANCEL();
         WindowMenu.UQ.ButtonUploadQuestionnaire();
