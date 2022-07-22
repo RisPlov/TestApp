@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ApplicationEmployeeAccounting" target="11" />
+      <module name="ApplicationEmployeeAccounting" target="1.8" />
       <module name="EmployeeAccounting" target="11" />
       <module name="untitled" target="11" />
     </bytecodeTargetLevel>

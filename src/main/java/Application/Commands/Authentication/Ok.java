@@ -29,7 +29,7 @@ import java.sql.Statement;
 
 public class Ok extends WindowAuthentication {
     public final Logger logs = LoggerFactory.getLogger(Ok.class);
-    public void ButtonOK() {//метод кнопки OK
+    public void ButtonOK() {
         WindowAuthentication.ok.addActionListener(e -> {
             try {
                 String Login = WindowAuthentication.login.getText();
