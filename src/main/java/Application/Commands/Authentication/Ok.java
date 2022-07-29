@@ -52,14 +52,14 @@ public class Ok extends WindowAuthentication {
                         logs.info("Приложение запущено! Пользователь: "+Login);
                         break;
                     }else if (!Login.equals(login) | (pas != password)) {
-                        mistake.setText("Данные введены не верно, попробуйте еще раз!");
+                        mistake.setText("The data entered is incorrect, try again!");
                         logs.info("Данные введены не верно, попробуйте еще раз! Пароль: "+pas+" Логин: "+Login);
                         Coon.close();
                     }
                 }
             } catch (Exception ex) {
                 mistake.setText("Данные введены не верно, попробуйте еще раз!");
-                logs.info("Данные введены не верно, попробуйте еще раз!");
+                logs.info("The data entered is incorrect, try again!");
             }
         });
     }

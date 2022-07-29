@@ -6,13 +6,15 @@
 
     <groupId>groupId</groupId>
     <artifactId>ApplicationEmployeeAccounting</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0.0</version>
 
     <name>ApplicationEmployeeAccounting</name>
 
     <properties>
+        <jdkVersion>11.0.1</jdkVersion>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <exeFileName>ApplicationEmployeeAccounting</exeFileName>
     </properties>
 
     <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
@@ -38,6 +40,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.36</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.akathist.maven.plugins.launch4j/launch4j-maven-plugin -->
     </dependencies>
 
     <build>
@@ -84,6 +87,74 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>shaded</shadedClassifierName>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>Application.EmployeeAccounting</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </plugin>
+
+
+                    <plugin>
+                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                        <artifactId>launch4j-maven-plugin</artifactId>
+                        <version>2.1.2</version>
+                        <executions>
+                            <execution>
+                                <id>plugin-loader</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>launch4j</goal>
+                                </goals>
+                                <configuration>
+                                    <headerType>gui</headerType>
+                                    <outfile>${exeFileName}.exe</outfile>
+                                    <classPath>
+                                        <mainClass>ApplicationEmployeeAccounting.target.ApplicationEmployeeAccounting-1.0.0.0.jar</mainClass>
+                                        <addDependencies>true</addDependencies>
+                                        <preCp>anything</preCp>
+                                    </classPath>
+                                    <icon>src/main/resources/Z.ico</icon>
+                                    <jre>
+                                        <minVersion>
+                                            ${jdkVersion}
+                                        </minVersion>
+                                    </jre>
+                                    <versionInfo>
+                                        <fileVersion>${project.version}</fileVersion>
+                                        <txtFileVersion>${project.version}</txtFileVersion>
+                                        <fileDescription>${project.name}</fileDescription>
+                                        <productVersion>${project.version}</productVersion>
+                                        <txtProductVersion>${project.version}</txtProductVersion>
+                                        <companyName>ABC</companyName>
+                                        <productName>EmployeeAccounting</productName>
+                                        <internalName>${exeFileName}</internalName>
+                                        <originalFilename>${exeFileName}.exe</originalFilename>
+                                        <copyright>2021 XXX.com</copyright>
+                                    </versionInfo>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
         </plugins>
     </build>
 </project>
