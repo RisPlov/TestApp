@@ -54,6 +54,7 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -69,6 +70,7 @@
                     </archive>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -88,30 +90,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <shadedClassifierName>shaded</shadedClassifierName>
-                    <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>Application.EmployeeAccounting</mainClass>
-                        </transformer>
-                    </transformers>
-                </configuration>
-            </plugin>
-
-
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
@@ -125,9 +103,9 @@
                                 </goals>
                                 <configuration>
                                     <headerType>gui</headerType>
-                                    <outfile>${exeFileName}.exe</outfile>
+                                    <outfile>${project.build.directory}/${exeFileName}.exe</outfile>
                                     <classPath>
-                                        <mainClass>ApplicationEmployeeAccounting.target.ApplicationEmployeeAccounting-1.0.0.0.jar</mainClass>
+                                        <mainClass>Application.EmployeeAccounting</mainClass>
                                         <addDependencies>true</addDependencies>
                                         <preCp>anything</preCp>
                                     </classPath>
